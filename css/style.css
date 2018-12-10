@@ -1,0 +1,16 @@
+#img {
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+.title {
+    margin-top: 35px;
+    font-size: 20px;
+    display: block;
+    width: 100%;
+}
+
+#word {
+    margin-bottom: 10px;
+}
