@@ -17,8 +17,10 @@ class Database
     {
         $result = [];
         foreach (static::$db_fields as $value) {
+
             $result[$value] = $this->$value;
         }
+
 
         return $result;
     }
@@ -82,19 +84,17 @@ class Database
 
     }
 
-    public function clear_value($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-
     public function clear_html_css_js($data)
     {
         $data = preg_replace('/<script\b[^>]*>(.*?)<\/script>/i', "", $data);
-        $data = preg_replace("#(</?\w+)(?:\s(?:[^<>/]|/[^<>])*)?(/?>)#ui", '$1$2', $data);
+        $data = preg_replace("#(</?\w+)(?:\s(?:[^<>/]|/[^<>])*)?(/?>)#ui", '', $data);
         $data = strip_tags($data, "");
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        $data = str_replace("\n", "", $data);
+        $data = str_replace("\t", "", $data);
+        $data = str_replace("'", "", $data);
         return $data;
     }
 }

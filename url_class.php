@@ -28,11 +28,12 @@ class Url extends Database
         $result = [];
 
         foreach ($words as $word) {
-            if (isset($result[$word])) {
-                $result[$word]++;
-            } else {
-                $result[$word] = 1;
-            }
+            if (strlen($word) >= 2)
+                if (isset($result[$word])) {
+                    $result[$word]++;
+                } else {
+                    $result[$word] = 1;
+                }
         }
 
         if (isset($this->id)) {
@@ -54,14 +55,22 @@ class Url extends Database
             $position = strpos($value, '"', 1);
             $value = substr($value, 0, $position);
             $position = strpos($value, '#', 0);
-            $pos = strpos($value, "<!DOCTYPE html><html><head><meta name=", 0);
-            $another_page = strpos($value, 'http', 0);
-            if ($position === false && strlen($value) > 1 && $pos === false && $another_page === false) {
-                $position = strpos($this->url, '/', 13);
-                if ($position !== false) {
-                    $index_urls[] = substr_replace($this->url, $value, $position);
+            $pos = strpos($value, "<!DOCTYPE html>", 0);
+            if ($position === false && strlen($value) > 1 && $pos === false) {
+
+                $domain = strpos($value, $this->url, 0);
+                if ($domain === false) {
+                    $another_page = strpos($value, 'http', 0);
+                    if ($another_page === false) {
+                        $position = strpos($this->url, '/', 13);
+                        if ($position !== false) {
+                            $index_urls[] = substr_replace($this->url, $value, $position);
+                        } else {
+                            $index_urls[] = $this->url . $value;
+                        }
+                    }
                 } else {
-                    $index_urls[] = $this->url . $value;
+                    $index_urls[] = $value;
                 }
             }
         }

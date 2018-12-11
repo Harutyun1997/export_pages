@@ -18,9 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $word = $_GET["name"];
-    if (empty($url)) {
-        echo 'Word';
+
+    if (empty($word)) {
+        echo 'Please enter Word';
     }
+
     $result = Word::search_word($word);
     echo json_encode($result);
 }

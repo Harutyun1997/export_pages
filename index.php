@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+    <title>Export pages</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -37,7 +37,6 @@
         </table>
 
     </div>
-    <script src="css/bootstrap/js/bootstrap.min.js"></script>
     <script src="script/jquery-3.0.0.min.js"></script>
     <script src="script/script.js"></script>
 </body>

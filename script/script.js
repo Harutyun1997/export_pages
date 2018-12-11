@@ -15,11 +15,13 @@ function searchUrl() {
             url: "ajax.php",
             cache: false,
             success: function (response) {
-                let words = JSON.parse(response);
-                let link, th, td, tr, element;
+                let urls = JSON.parse(response);
+                let link, th, td, tr;
+                let element = document.getElementById("result");
                 let count = 1;
-                words.forEach(function (url) {
-                    element = document.getElementById("result");
+                element.innerHTML = '';
+                urls.forEach(function (url) {
+
                     tr = document.createElement("tr");
                     th = document.createElement("th");
                     th.setAttribute('scope', 'col');
@@ -41,6 +43,9 @@ function searchUrl() {
             }
         });
     }
+    else {
+        document.getElementById("result").innerText ='';
+    }
 }
 
 function urlIndexed() {
@@ -48,10 +53,9 @@ function urlIndexed() {
     url = url.trim();
     let valid = /^(ftp|http|https):\/\/[^ "]+$/.test(url);
 
-
     if (valid) {
+        document.getElementById('index').setAttribute("disabled", "disabled");
         document.getElementById("img").style.display = 'inline-block';
-        document.getElementById("index").Disabled = true;
 
         $.ajax({
             type: "POST",
@@ -61,7 +65,7 @@ function urlIndexed() {
             cache: false,
             success: function (response) {
                 document.getElementById("img").style.display = 'none';
-                document.getElementById("index").Disabled = false;
+                document.getElementById('index').removeAttribute("disabled");
                 let par = document.getElementById("response");
                 par.innerText = response;
             }
